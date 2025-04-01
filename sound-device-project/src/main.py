@@ -24,6 +24,25 @@ class GeminiInterpreter:
         except Exception as e:
             logger.error(f"Failed to initialize Gemini: {e}")
             sys.exit(1)
+    
+    def call_gemini(self, user_text):
+        prompt = PROMPT_TEMPLATE.format(user_input=user_text)
+        
+        try:
+            response = self.gemini_model.generate_content(
+                prompt, # send the prompt
+                generation_config=genai.types.GenerationConfig(
+                    candidate_count=1,
+                    temperature=0.3 # keeping this extremely deterministic
+                ),
+                safety_settings=safety_settings
+            )
+
+            # idea is that we'll define the user input here in case it is not a exit command
+        
+        except Exception as e:
+            print(f"Error calling gemini: {e}")
+            return 
 
 def main():
     interpreter = GeminiInterpreter()
@@ -33,6 +52,10 @@ def main():
             user_input = input("exit to leave")
             if user_input.lower() == "exit":
                 break
+            if not user_input:
+                continue
+
+            command_json = interpreter.call_gemini(user_input) 
 
     except KeyboardInterrupt:
         print("\nExiting.") # ctrl + c
