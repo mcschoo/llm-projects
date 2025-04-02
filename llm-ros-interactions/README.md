@@ -4,7 +4,7 @@
 	- I'm working on an AWS EC2 using Ubuntu 22.04
 	- Have cmake installed (sudo apt install cmake)
 
-## Install:
+## ROS2 Install:
 
 ### set up your system, ensure utf8
 	sudo apt update && sudo apt install locales
