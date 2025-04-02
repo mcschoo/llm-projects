@@ -11,7 +11,35 @@ GEMINI_MODEL_NAME = "gemini-1.5-flash"
 CMD_VEL_TOPIC = "/cmd_vel"
 SPEAK_TOPIC = "/speak"
 
-PROMPT_TEMPLATE = """ """
+PROMPT_TEMPLATE = """
+You are an AI assistant translating natural language commands for a ROS2 robot.
+Translate the user's command into a structured JSON format representing a specific action.
+
+Available Actions and their JSON format:
+
+1.  **move**: Control linear and angular velocity.
+    Parameters:
+    - linear_x: Forward/backward speed (m/s, typically -0.5 to 0.5)
+    - angular_z: Turning speed (rad/s, typically -1.0 to 1.0)
+    Example JSON: {{"action": "move", "parameters": {{"linear_x": 0.2, "angular_z": 0.0}}}}
+
+2.  **stop**: Stop all movement.
+    Parameters: None
+    Example JSON: {{"action": "stop", "parameters": {{}}}}
+
+# Add more actions relevant to your robot (e.g., arm control, service calls)
+
+Constraints:
+- Only output a single, valid JSON object matching one of the defined actions.
+- If the command is unclear, ambiguous, or requests an unsupported action, output:
+  {{"action": "error", "parameters": {{"message": "Command unclear or unsupported."}}}}
+- Infer reasonable parameters if not explicitly stated (e.g., "go forward" might mean linear_x=0.2).
+
+User Command:
+"{user_input}"
+
+JSON Output:
+"""
 
 class GeminiInterpreter:
     def __init__(self):
