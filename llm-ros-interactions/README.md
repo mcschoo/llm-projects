@@ -63,7 +63,7 @@
 	colcon build --symlink-install
 
 ### you might have similar issues with colcon install, run this:
-pip install --user colcon-common-extensions
-echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.bashrc
-source ~/.bashrc
+	pip install --user colcon-common-extensions
+	echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.bashrc
+	source ~/.bashrc
 
