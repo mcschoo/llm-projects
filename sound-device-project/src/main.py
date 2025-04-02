@@ -5,11 +5,15 @@ import json
 import logging
 
 # setup gemini and (eventually) ros2
-GEMINI_API_KEY = "# replace with your own api key"
+GEMINI_API_KEY = "replace with yours"
 GEMINI_MODEL_NAME = "gemini-1.5-flash" 
 # intended ROS topic/service names, this should probably be changed once we actually init ros2
 CMD_VEL_TOPIC = "/cmd_vel"
 SPEAK_TOPIC = "/speak"
+
+# config logger, replace with ros one later
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
 PROMPT_TEMPLATE = """
 You are an AI assistant translating natural language commands for a ROS2 robot.
