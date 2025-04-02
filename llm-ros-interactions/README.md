@@ -1,6 +1,6 @@
 ### LLM & Robotic Interaction Project
 
-#### System Setup:
+## System Setup:
 	- I'm working on an AWS EC2 using Ubuntu 22.04
 	- Have cmake installed (sudo apt install cmake)
 
