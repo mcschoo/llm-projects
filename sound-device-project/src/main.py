@@ -5,7 +5,7 @@ import json
 import logging
 
 # setup gemini and (eventually) ros2
-GEMINI_API_KEY = "AIzaSyAiAWiOwZzUxxNHwwl9RF7VPkmMP77EE3c" # replace wiht your own api key
+GEMINI_API_KEY = "# replace with your own api key"
 GEMINI_MODEL_NAME = "gemini-1.5-flash" 
 # intended ROS topic/service names, this should probably be changed once we actually init ros2
 CMD_VEL_TOPIC = "/cmd_vel"
@@ -49,7 +49,7 @@ class GeminiInterpreter:
             self.gemini_model = genai.GenerativeModel(GEMINI_MODEL_NAME)
             logger.info(f"Gemini model '{GEMINI_MODEL_NAME}' initialized.")
         except Exception as e:
-            logger.error(f"Failed to initialize Gemini: {e}")
+            logger.error(f"Failed to initialize Gemini: {e}") # debugging
             sys.exit(1)
     
     def call_gemini(self, user_text):
@@ -89,19 +89,50 @@ class GeminiInterpreter:
             print(f"Error calling gemini: {e}")
             return 
 
+    # return command to user (what would be sent to ros)
+    def print_intended_command(self, command_data):
+        action = command_data.get("action")
+        params = command_data.get("parameters", {})
+
+        print("-" * 20) 
+
+        if action == "move":
+            linear_x = float(params.get("linear_x", 0.0))
+            angular_z = float(params.get("angular_z", 0.0))
+            print(f"INTENDED ROS ACTION:")
+            print(f"  Publish to Topic: {CMD_VEL_TOPIC}")
+            print(f"  Data: linear.x = {linear_x}, angular.z = {angular_z}")
+
+        elif action == "stop":
+            print(f"INTENDED ROS ACTION:")
+            print(f"  Publish to Topic: {CMD_VEL_TOPIC}")
+            print(f"  Data: linear.x = 0.0, angular.z = 0.0")
+
+        elif action == "error":
+            print(f"ERROR from Gemini Interpretation:")
+            print(f"  Message: {params.get('message', 'Unknown error')}")
+
+        else:
+            print(f"INTENDED ROS ACTION: None (unsupported action '{action}')")
+
+        print("-" * 20 + "\n")
+
+
 def main():
     interpreter = GeminiInterpreter()
 
     try:
         while True: # loop indefinitely
             try:
-                user_input = input("exit to leave")
+                user_input = input("Send exit to leave: ")
                 if user_input.lower() == "exit":
                     break
                 if not user_input:
                     continue
 
                 command_json = interpreter.call_gemini(user_input) 
+                if command_json:
+                    interpreter.print_intended_command(command_json)
             
             except Exception as e: 
                  logger.error(f"problem in main loop: {e}")
