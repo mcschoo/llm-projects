@@ -5,7 +5,7 @@ import json
 import logging
 
 # setup gemini and (eventually) ros2
-GEMINI_API_KEY = "replace with yours"
+GEMINI_API_KEY = "AIzaSyAiAWiOwZzUxxNHwwl9RF7VPkmMP77EE3c"
 GEMINI_MODEL_NAME = "gemini-1.5-flash" 
 # intended ROS topic/service names, this should probably be changed once we actually init ros2
 CMD_VEL_TOPIC = "/cmd_vel"
@@ -60,6 +60,12 @@ class GeminiInterpreter:
         prompt = PROMPT_TEMPLATE.format(user_input=user_text)
         
         try:
+            safety_settings = [
+                {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
+                {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
+                {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
+                {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
+            ]
             response = self.gemini_model.generate_content(
                 prompt, # send the prompt
                 generation_config=genai.types.GenerationConfig(
