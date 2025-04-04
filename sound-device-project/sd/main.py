@@ -128,7 +128,7 @@ class GeminiInterpreter:
         print("-" * 20 + "\n")
 
 
-def show_devices():
+def pickSD():
     print("Available Input Devices:")
     devices = sd.query_devices()
     # default_samplerate = 44100 # common default
@@ -144,17 +144,14 @@ def show_devices():
 
     if not logDevices:
         print("  No input devices found!")
-    return logDevices
-
-def select_device(logDevices):
-    if not logDevices:
         return
-    
+
+    # select your device
     prompt_choice = input("Choose your character: \n") # select index of device u want
     choice = int(prompt_choice)
 
     # "parse" choice
-    get_device = next((d for d in input_devices if d['index'] == choice))
+    get_device = next((d for d in logDevices if d['index'] == choice))
     if get_device:
         print(f"Using device {choice}.")
         return choice # return idx
@@ -163,8 +160,7 @@ def select_device(logDevices):
 def main():
     interpreter = GeminiInterpreter()
 
-    list_devices = show_devices()
-    idx = select_device(list_devices)
+    idx = pickSD()
 
     try:
         while True: # loop indefinitely
