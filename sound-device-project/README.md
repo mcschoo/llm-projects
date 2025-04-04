@@ -3,6 +3,7 @@
 ## Project Requirements
     - Google AI Studio account, with an API key which you'll substitute into this project
     - Google's generativeai python library installed on your system
+    - Python libs: sounddevice, numpy, & SpeechRecognition (pip install sounddevice numpy SpeechRecognition)
 
 ## How to Run the Code
     python sound-device-project/cli/main.py
