@@ -131,15 +131,16 @@ class GeminiInterpreter:
 def show_devices():
     print("Available Input Devices:")
     devices = sd.query_devices()
-    srate = 44100 # common default
+    # default_samplerate = 44100 # common default
     logDevices = []
 
     for i, device in enumerate(devices):
         # *****check host API to filter out some virtual/loopback devices if needed
         if device['max_input_channels'] > 0:
-            # srate = int(sd.query_hostapis(device['hostapi'])['srate']) # figure out how to configure host api
-            print(f"  {i}: {device['name']} (Sample Rate: {srate} Hz)")
-            logDevices.append({"index": i, "samplerate": srate}) #store idx + rate
+            # default_samplerate = int(sd.query_hostapis(device['hostapi'])['default_samplerate']) # figure out how to configure host api
+            print(f"  {i}: {device['name']} (Default Sample Rate: {device['default_samplerate']} Hz)")
+            # print(f"  {i}: {device['name']} (Sample Rate: {default_samplerate} Hz)")
+            logDevices.append({"index": i, "samplerate": device['default_samplerate']}) #store idx + rate
 
     if not logDevices:
         print("  No input devices found!")
