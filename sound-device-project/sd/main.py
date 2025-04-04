@@ -3,6 +3,7 @@ import os
 import sys
 import json
 import logging
+import sounddevice as sd
 
 # setup gemini and (eventually) ros2
 GEMINI_API_KEY = "add your own api key"
@@ -51,7 +52,6 @@ class GeminiInterpreter:
         try:
             genai.configure(api_key=GEMINI_API_KEY)
             self.gemini_model = genai.GenerativeModel(GEMINI_MODEL_NAME)
-            logger.info(f"Gemini model '{GEMINI_MODEL_NAME}' initialized.")
         except Exception as e:
             logger.error(f"Failed to initialize Gemini: {e}") # debugging
             sys.exit(1)
@@ -96,7 +96,7 @@ class GeminiInterpreter:
                  return {"action": "error", "parameters": {"message": f"Invalid JSON structure: {e}"}}
 
         except Exception as e:
-            print(f"Error calling gemini: {e}")
+            print(f"Error calling gemini:\n{e}")
             return 
 
     # return command to user (what would be sent to ros)
@@ -128,8 +128,42 @@ class GeminiInterpreter:
         print("-" * 20 + "\n")
 
 
+def show_devices():
+    print("Available Input Devices:")
+    devices = sd.query_devices()
+    srate = 44100 # common default
+    logDevices = []
+
+    for i, device in enumerate(devices):
+        # *****check host API to filter out some virtual/loopback devices if needed
+        if device['max_input_channels'] > 0:
+            # srate = int(sd.query_hostapis(device['hostapi'])['srate']) # figure out how to configure host api
+            print(f"  {i}: {device['name']} (Sample Rate: {srate} Hz)")
+            logDevices.append({"index": i, "samplerate": srate}) #store idx + rate
+
+    if not logDevices:
+        print("  No input devices found!")
+    return logDevices
+
+def select_device(logDevices):
+    if not logDevices:
+        return
+    
+    prompt_choice = input("Choose your character: \n") # select index of device u want
+    choice = int(prompt_choice)
+
+    # "parse" choice
+    get_device = next((d for d in input_devices if d['index'] == choice))
+    if get_device:
+        print(f"Using device {choice}.")
+        return choice # return idx
+
+
 def main():
     interpreter = GeminiInterpreter()
+
+    list_devices = show_devices()
+    idx = select_device(list_devices)
 
     try:
         while True: # loop indefinitely
