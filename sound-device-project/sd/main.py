@@ -24,15 +24,13 @@ Available Actions and their JSON format:
 
 1.  **move**: Control linear and angular velocity.
     Parameters:
-    - linear_x: Forward/backward speed (m/s, typically -0.5 to 0.5)
+    - linear_x: Forward/backward speed (m/s, typically -5 to 5)
     - angular_z: Turning speed (rad/s, typically -1.0 to 1.0)
     Example JSON: {{"action": "move", "parameters": {{"linear_x": 0.2, "angular_z": 0.0}}}}
 
 2.  **stop**: Stop all movement.
     Parameters: None
     Example JSON: {{"action": "stop", "parameters": {{}}}}
-
-# Add more actions relevant to your robot (e.g., arm control, service calls)
 
 Constraints:
 - Only output a single, valid JSON object matching one of the defined actions.
@@ -100,7 +98,7 @@ class GeminiInterpreter:
             return 
 
     # return command to user (what would be sent to ros)
-    def print_intended_command(self, command_data):
+    def print_cmd(self, command_data):
         action = command_data.get("action")
         params = command_data.get("parameters", {})
 
@@ -156,6 +154,11 @@ def pickSD():
         print(f"Using device {choice}.")
         return choice # return idx
 
+def record():
+
+    # empty for now, using sound devices here (?)
+
+    return
 
 def main():
     interpreter = GeminiInterpreter()
@@ -173,7 +176,7 @@ def main():
 
                 command_json = interpreter.call_gemini(user_input) 
                 if command_json:
-                    interpreter.print_intended_command(command_json)
+                    interpreter.print_cmd(command_json)
             
             except Exception as e: 
                  logger.error(f"problem in main loop: {e}")
