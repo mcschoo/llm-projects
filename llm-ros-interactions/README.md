@@ -8,7 +8,7 @@
 	- open up two different terminals
 	- In Terminal 1:
 		- source ~/ros2_ws/install/setup.bash
-		- ros2 run basic_comm talker
+		- ros2 run basic_comm talker --ros-args -p message:="Beep boop 🤖"
 	- In Terminal 2:
 		- source ~/ros2_ws/install/setup.bash
 		- ros2 run basic_comm listener

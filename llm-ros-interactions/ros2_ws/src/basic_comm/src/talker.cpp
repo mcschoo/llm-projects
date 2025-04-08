@@ -7,6 +7,8 @@ using namespace std::chrono_literals;
 class Talker : public rclcpp::Node {
 public:
   Talker() : Node("talker_node") {
+    this->declare_parameter<std::string>("message",
+                                         "Hello from default param!");
     publisher_ = this->create_publisher<std_msgs::msg::String>("commands", 10);
     timer_ =
         this->create_wall_timer(1s, std::bind(&Talker::publish_message, this));
@@ -14,8 +16,9 @@ public:
 
 private:
   void publish_message() {
+    std::string msg_text = this->get_parameter("message").as_string();
     auto msg = std_msgs::msg::String();
-    msg.data = "Hello world";
+    msg.data = msg_text;
     RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", msg.data.c_str());
     publisher_->publish(msg);
   }
