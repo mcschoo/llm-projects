@@ -8,10 +8,12 @@
 	- open up two different terminals
 	- In Terminal 1:
 		- source ~/ros2_ws/install/setup.bash
-		- ros2 run basic_comm talker --ros-args -p message:="Beep boop 🤖"
+		- ros2 run basic_comm talker
 	- In Terminal 2:
 		- source ~/ros2_ws/install/setup.bash
 		- ros2 run basic_comm listener
+	- In Terminal 3 (Sending live updates):
+		- ros2 param set /talker_node message "your command here" 
 
 ## Local System Setup:
 	- I'm working on an AWS EC2 using Ubuntu 22.04
