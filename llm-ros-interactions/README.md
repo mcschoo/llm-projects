@@ -1,6 +1,19 @@
 # LLM & Robotic Interaction Project
 
-## System Setup:
+## Using "The Construct" Free-tier Workspace (Recommended)
+	- Copy ros2_ws folder into your IDE
+	- cd into the folder
+	- Run:
+		- colcon build
+	- open up two different terminals
+	- In Terminal 1:
+		- source ~/ros2_ws/install/setup.bash
+		- ros2 run basic_comm talker
+	- In Terminal 2:
+		- source ~/ros2_ws/install/setup.bash
+		- ros2 run basic_comm listener
+
+## Local System Setup:
 	- I'm working on an AWS EC2 using Ubuntu 22.04
 	- Have cmake installed (sudo apt install cmake)
 

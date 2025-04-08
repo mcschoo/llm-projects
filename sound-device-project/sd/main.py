@@ -126,6 +126,8 @@ class GeminiInterpreter:
         print("-" * 20 + "\n")
 
 
+####################################### sound recording functions ############
+
 def pickSD():
     print("Available Input Devices:")
     devices = sd.query_devices()

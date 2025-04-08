@@ -5,7 +5,7 @@ import json
 import logging
 
 # setup gemini and (eventually) ros2
-GEMINI_API_KEY = "add your own api key"
+GEMINI_API_KEY = "AIzaSyAiAWiOwZzUxxNHwwl9RF7VPkmMP77EE3c"
 GEMINI_MODEL_NAME = "gemini-1.5-flash" 
 # intended ROS topic/service names, this should probably be changed once we actually init ros2
 CMD_VEL_TOPIC = "/cmd_vel"
