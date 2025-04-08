@@ -1,0 +1,88 @@
+Mikey Schoonmaker
+Computer Science B.S.
+Aeronix
+Embedded Systems Software Engineering
+COOP 1010
+
+
+Background on Aeronix & ATG
+
+	Aeronix describes themselves on their website as follows: “We are a U.S. Department of Defense-centric company providing excellence in the form of products and services to support warfighters”. The company products normally encompass what’re called “rugged ethernet products” - this means that we engineer products that often employ ethernet to accomplish some goal or fulfill some need presented by our customers. They’re considered rugged due to the environments we have to design them for, which leads to us often using heavier duty hardware to ensure the integrity of anything we’re putting out into the field.
+
+Aeronix is a part of a shell company called ATG, or Aeronix Technologies Group. This shell company was created by a group of investors that has only expanded in recent years as a way of bringing together companies that they felt could compete better in the industry under the same name. Four companies in total make up ATG - Aeronix, ITI Engineering, SIP, and Augustus Aerospace. I mention this because of the networking opportunity this presents you with. You won’t often collaborate with engineers from the other companies, but it gives you something in common with them, which is a powerful networking tool should you choose to make it one. 
+
+The employees of Aeronix have been well established in their field for a long, long time, even before they began focusing their efforts toward DoD products. Many of the engineers you’ll get to work with were on the cutting edge of things like the MP3 player, or various IoT projects. This gives a wide range of experience for you to tap into, and the general personability and good willed nature of the people in the office make them super ready to speak out about the sort’ve things they’ve done, and where you can get involved. There’s a ton of learning to be done with Aeronix.
+
+
+Company Environment
+
+	At the time of my first rotation, and what probably still holds true within a year or two of my working this position, Aeronix had around 120 employees total between their Melbourne and Greenville offices, with only about 20 of them at their Greenville location. This is the perfect company size to work in as an intern. A company technically leaves the “startup” phase at just around 100 employees - that means they’re small enough for you to make an impact, but well established and well proven enough that they’ve made their way in industry, and you can really learn a ton from them.
+
+I’ve worked on three research projects prior to this. One was with CU-ICAR, one ended up in the hands of NASA, and one was with Clemson Genetics & Biochemistry. I also had a summer internship with Giorgio Armani at their head office in NYC. I can say, with confidence, it is very rare for you to meet a group of co-workers as tightly knit, and as strongly connected as this one. There is an exceptional group of people housed within these offices, both in terms of their personalities and intellects, and they do everything they can to make you feel welcome and involved. You won’t be in school while you’re co-oping, but your entire semester will still be dedicated to learning, and everyone in that office is more than willing to help you out along the way. They’re great people, and you should take every opportunity to learn from them that you can.
+
+
+What Would I Have Done Differently? What Did I Do Well?
+
+	The best advice I can offer is to ask questions. I honestly never thought I’d be the person who didn’t ask enough questions, but I wish I asked a million more towards the start of my rotation. To succeed, you need to be extremely curious about everything you’re doing and everything you’re working on, both functionally and conceptually. About a third of my way through my semester, I started gathering questions in a notebook, then sitting down often with my mentor or various people around the office who had experience in what I wanted to learn about, and just asking away. I’d wish I started sooner - it was extremely eye opening for me as a student. 
+
+	What I messed up with this semester is remaining as an active member on my ICAR research, even while co-oping, and I retained a lot of my community involvement in Clemson. I don’t think it was necessarily a bad thing, but there were definitely times that I wished I could spend an extra few hours in the office learning as opposed to driving back to my apartment. It’s just a tradeoff, and you have to sit down with yourself to figure out what’s important for you, and what you can miss out on to decide whether or not that activity or involvement is something you wish to retain.
+
+	What I did well with was my work ethic. At Aeronix, I worked a 9/80 schedule. That means you work 9 hours a day (not including lunch), but get every other Friday off. Most days this semester, I worked 10 hours. I didn’t go into this co-op intending to do so, but my mentors did such a great job responding to my interests and putting me on projects where I could really see the impact I was having, it became hard not to. You will almost never regret spending more time in the office, provided you don’t skip out on things in your personal life to do so. 
+
+	The last thing I want to leave you with here is to not stress about life getting in the way of your time at the company. Never feel bad about taking that time to make a call to a bank, or going to a doctor's appointment you really shouldn’t be putting off any longer. Early into my rotation, I spent way too much time worrying about what others were thinking about me those one to two times I had to step out of the office, instead of realizing that for one nobody cares, and two I was doing well in my position. So long as you’re putting the effort in while you’re there, people will really see that, so don’t worry about taking care of yourself and your health when you have to. 
+
+
+
+
+
+
+Technical Project Experience & Company Tech Stack
+
+	This is going to be a pretty hefty section for anyone reading this just to get some more company background information (something Aeronix loves by the way), so to try and help you out, here’s a brief overview of everything I’ll be talking about, and what I got out of it. Feel free to read parts of this section if you want to go a bit more in depth to hear about all that I did, or the whole thing if you’d like. 
+
+Aeronix Tech Stack: 		Microsoft Office (Teams & Outlook), Atlassian Suite (Bitbucket, Jira, and Confluence)
+*you’ll use these wherever you end up in the company
+
+Project Involvement:
+	Hosting Custom Embedded OS Kernels in a Docker Container 					          (5 weeks)
+Tech Stack: Python, C, C++, JavaScript, Yocto Project, Docker Engine/API, Linux, TeraTerm
+	Testing Automation with GoogleTests								          (2 weeks)
+Tech Stack: Python, C, C++, Yocto Project, Docker Engine/API, Linux, GoogleTests, GitHub
+	Development of a Launcher Interface Module							          (6 weeks)
+Tech Stack: C, Assembly (for IAR & GCC), Linux, Libero IDE
+	AeroGPT Company LLM Project Proposal						      	            (1 week)
+Proposed Tech Stack: NVIDIA Brev.dev, Azure Finetuning, PyTorch, Hugging Face
+
+(Some of) What My Resume Got Out of This Experience:
+R&D surrounding rugged ethernet products, sensors, and RF space communications in a office of around 20 engineers
+Built an embedded Linux kernel within Docker containers using Yocto Project on a Linux based environment
+Modified low level API Python code to pull data from FPGA registers, & coded a live website that polls the API every 5 seconds
+Submitted and defended a proposal to integrate a company wide QLora-LLM to company investors, and Directors of both Engineering & Information Systems. Presented the proposal at a meeting with 18 engineers of various titles.
+Implemented a RTOS with unique tasks that leverages UART and GPIO drivers, and flashed it to a dev board using both Libero and a custom bootloader I developed in C
+Debugged GCC Assembly code to resolve errors in building our bootloader, which arose when moving from IAR to GCC and when altering our project's memory map
+
+
+If you have any questions for me, please feel totally free to reach out to me using either of the methods below. I can’t promise a snappy response time, but I always love getting to talk to fellow Clemson students!
+	Email: mcschoo@g.clemson.edu (for outlook email if Clemson is on that yet, just remove the g)
+	LinkedIn: https://www.linkedin.com/michael-schoonmaker/ 
+
+
+About My Experience:
+
+My mentor throughout my first rotation with Aeronix was Drew Kaisner, and my PMs were Jeff Kaisner and Zach Briggs.
+
+	The first project I was given for my rotation was to get some of the company’s previously established emulators working with Yocto Project version 3.1, Dunfell. For anyone unfamiliar with embedded systems, when it comes to selecting an operating system to use for your project, you can’t exactly just load Windows or MacOS onto a low level, low power microcontroller. To circumnavigate that issue, embedded system engineers used to have to be extremely familiar with operating systems and their kernels, so that when it came time to start a project, they could edit them as needed. It was either that or write your own variation of a kernel, and of course both of those solutions are time consuming and labor intensive. That’s where Project Yocto was born - it was built to automate the process of creating a custom Linux kernel, and it’s a niche that the project has filled for a good amount of time now. While that automation is great, it has an extremely steep learning curve associated with it. An intern before me had implemented Yocto onto one of the company’s larger projects, but it had fallen out of date with Python going from 2 to 3 a few years back. This emulator specifically is also one intended to connect with the LIM (Launcher Interface Module) I would be helping to develop later into my semester, so Drew figured this was a great starting point for me. 
+
+	How Yocto works is by running a bitbake operation across a number of recipes, many of which are user created, but some of which are pulled from co-projects that work with the Yocto team, such as OpenEmbedded. Almost every single one of these recipes ties back to python in some shape or form, including the (at the time) 8,000 line API Aeronix had created before my time with them to use in this project. You’d think going through and updating python code versions was mundane, but it actually really wasn’t. Yocto had a ton of issues with me moving it up from version ~1.7 to 3.1, and that’s where I attribute a lot of my time learning about kernels and kernel memory before jumping into getting my own RTOS set up, which is a project I’d perform later. To this day the largest bug I’ve ever had came when we tried to flash our Yocto build. Getting it to build was a bear in and of itself, but it took me 32 hours to debug the kernel’s rootfs (root file system) and how it was mounting to our custom creation. It’s some of the best bonding I’ve ever done with the team - I spent a ton of time collaborating and brainstorming and problem solving not just with my mentor, but with engineers from all around the office who wanted to help me, including my future PM, fellow co-op, and one of the guys that would help inspire my proposal later down the line. It was a great experience, and like most of my time here, I wouldn’t trade that learning for the world. I had the opportunity to learn and gain exposure to working with every part of a kernel.
+
+	The second part of the project was to get our Yocto build building into and flashing from a Docker container. Containerization applications have become extremely popular over the past few years or so, especially with AI models, and Aeronix as a company is always looking for ways to stay cutting edge, and people who can help them do that. It’s an extremely exciting environment to get to be a part of. Containers are great because they allow you to package software together - that includes things like fully trained models and, in our case, custom embedded Linux kernels. This project gave me direct exposure to working with Docker’s API, which is vital experience for anyone looking to break into Software Development or Software Engineering. API’s are often referred to as the backbone of the software industry, and your experience with them will often make or break you to some companies. I had absolutely 0 experience with APIs walking into my internship at Aeronix, but I was pretty quick to pick things up with the help of others. This was also a part of the project that was big on company impact. You’ll have meetings once a month with the office in Florida to give updates on your progress, and I got a good handful of people messaging me after I presented my progress with Docker about how to integrate it into their own builds. It’s become a part of the company software standard for CI/CD pipelines since. 
+
+	Finally, the last piece of this project was moving our webpage over from a live page to a static one. This involved actually utilizing the API Aeronix had develop after having spent so much time debugging it. It was also my first time working with JavaScript, though I did have some experience with React before my co-op. This project and the coding I did was most similar to what I'd seen in my classes - it involved implementing function calls into the API that would read from some of the hardware registers after certain interrupts and messages had been sent or received throughout the hardware system. This meant a lot of coding around our interrupts and the way our interrupts were processed, and resulted in some debugging related to our EBR bus and message frames. In addition to learning about interrupts, I got exposure to polling in moving our website from static to live. 
+
+	My second project was meant to flush out this new build system I’d helped develop by creating tests for it. This involved drawing from a GitHub repository to implement a standard of unit testing to ensure 100% code coverage in our project. This hasn't seen implementation like Docker has in CI/CD pipelines due to the various methods of unit testing which already exist across Aeronix, but it has been discussed. 
+
+	The third major project I worked on was the company's LIM (Launcher Interface Module). This project has involved three major steps: implementing a free RTOS (real time operating system), creating our bootloader, establishing a task manager for the OS, and actually creating the tasks & their functionality. This has been by far the most expansive and hands on project I've had since starting my co-op. Creating the tasks especially, I've exclusively been coding for the past four weeks, with another two ahead of me, and I've loved every second of it. This is a customer driven project, and for Aeronix, that means we're using Agile as our workflow. Agile, as many know, is a methodology of development following the ideas of flexibility around potentially changing deliverables. It's supposed to promote collaboration amongst team members, and has become a big buzzword in industry for the past few years. It's great experience to gain as a engineer, and Aeronix lets you get really hands on with the process. 
+	
+	Establishing our tasks and task manager has also given me a ton of exposure to implementing different types of processes and common algorithms found in embedded systems. I've been reading from and writing to registers, I've developed a CLI for our project, and I've recently starting working on a state machine. I started with two empty repositories about four weeks ago, but I've built a lot of code up since then that'll be setting our project up future development this spring. We're on a pretty aggressive schedule, aiming to ship in 6 weeks, so it's been pretty go go go in our small team of ~5. As someone who likes to stay busy and aims for that sort of fast paced environment, it's a feeling of importance and security I've really appreciated having in my workplace. 
+
+Learning & Development

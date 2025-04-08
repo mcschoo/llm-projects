@@ -2,8 +2,8 @@ import os
 import json
 import chromadb
 from chromadb.utils import embedding_functions
-from sentence_transformers import SentenceTransformer # Use directly for more control if needed
-from tqdm import tqdm # Progress bar
+from sentence_transformers import SentenceTransformer 
+from tqdm import tqdm # Progress bar for fun
 import logging
 
 import config
@@ -12,8 +12,7 @@ import text_extractor
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 def chunk_text(text, size=config.CHUNK_SIZE, overlap=config.CHUNK_OVERLAP):
-    """Simple text chunking function."""
-    # Basic splitting by characters, consider token-based splitting for accuracy
+    # Basic splitting by characters - could alter to token splitting (?)
     chunks = []
     start = 0
     while start < len(text):
@@ -24,17 +23,16 @@ def chunk_text(text, size=config.CHUNK_SIZE, overlap=config.CHUNK_OVERLAP):
              break # Avoid infinite loop on pure overlap
     return chunks
 
+# scans drive, extracts text, chunks, embeds, and stores in an idx
 def build_index():
-    """Scans drive, extracts text, chunks, embeds, and stores."""
     logging.info("Starting file indexing process...")
     file_paths = []
     all_chunks = []
-    all_metadata = [] # Store file path with each chunk
-    doc_ids = [] # Unique ID for each chunk
+    all_metadata = [] # store file path with each chunk
+    doc_ids = [] # give each chunk an id we can reference later ************
 
     logging.info(f"Scanning directory: {config.DRIVE_ROOT}")
-    # Use tqdm for progress visualization
-    file_scan_list = []
+    file_scan_list = [] # tqdm so I can see progress
     for root, _, files in os.walk(config.DRIVE_ROOT):
         for file in files:
              file_scan_list.append(os.path.join(root, file))
@@ -47,7 +45,7 @@ def build_index():
         _, extension = os.path.splitext(file_path)
 
         if extension.lower() in config.SUPPORTED_EXTENSIONS:
-            file_paths.append(relative_path) # Store relative path
+            file_paths.append(relative_path)
             logging.debug(f"Extracting text from: {relative_path}")
             text = text_extractor.extract_text(file_path)
 
@@ -67,38 +65,36 @@ def build_index():
 
     logging.info(f"Extracted {len(all_chunks)} text chunks from {len(file_paths)} files.")
 
-    # --- Store simple file path index ---
+    # store the file path index for reference later
     logging.info(f"Saving file path index to {config.INDEX_PATH}")
     try:
         with open(config.INDEX_PATH, 'w', encoding='utf-8') as f:
             json.dump(file_paths, f, indent=4)
     except Exception as e:
         logging.error(f"Failed to save file path index: {e}")
-        return # Stop if we can't save this
+        return # end if no saving
 
     if not all_chunks:
         logging.warning("No text chunks were generated. Vector DB will be empty.")
         return
 
-    # --- Setup Vector DB ---
+    # create our vector db, which we'll use to store and ref chunked data
     logging.info("Setting up vector database...")
     try:
-        # Use default embedding function provided by Chroma, matching our model
+        # Chroma embedding function to embedded, matching our model
         sentence_transformer_ef = embedding_functions.SentenceTransformerEmbeddingFunction(
             model_name=config.EMBEDDING_MODEL_ID, device=config.DEVICE
         )
 
-        # Persistent storage
+        # important data ---> persistent storage 
         client = chromadb.PersistentClient(path=config.VECTOR_DB_PATH)
 
-        # Create or get collection with the embedding function
-        # Note: If the collection exists with a *different* embedding function, this will error.
-        # Consider deleting the DB dir if changing embedding models.
+        # IMPORTANT: iff the collection exists with a different embedding function, this will error !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         collection = client.get_or_create_collection(
             name="file_content",
             embedding_function=sentence_transformer_ef,
-            metadata={"hnsw:space": "cosine"} # Use cosine distance
-        )
+            metadata={"hnsw:space": "cosine"}
+        )  # Consider deleting the DB dir if changing embedding models.
         logging.info(f"Vector DB Collection 'file_content' ready.")
 
     except Exception as e:
@@ -106,9 +102,9 @@ def build_index():
         logging.error("Ensure ChromaDB is installed and dependencies are met.")
         return
 
-    # --- Embed and Add to Vector DB (in batches) ---
-    logging.info("Embedding chunks and adding to vector database (this may take a while)...")
-    batch_size = 64 # Adjust based on memory/GPU VRAM
+    # embed + add to vector db now that they're instantiated, chunk at a time
+    logging.info("Embedding chunks and adding to vector database - don't panic if this runs for a long time...")
+    batch_size = 64 # NEED TO ADJUST THIS VALUE BEFORE MOVING TO ARX HARDWARE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     num_batches = (len(all_chunks) + batch_size - 1) // batch_size
 
     try:
