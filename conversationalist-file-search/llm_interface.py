@@ -1,6 +1,3 @@
-# ----------------------------------------
-# llm_interface.py
-# ----------------------------------------
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
 import logging

@@ -1,6 +1,3 @@
-# ----------------------------------------
-# file_indexer.py
-# ----------------------------------------
 import os
 import json
 import chromadb

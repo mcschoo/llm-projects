@@ -1,19 +1,3 @@
-# requirements.txt
-# torch
-# torchvision
-# torchaudio
-# transformers
-# accelerate
-# bitsandbytes # Optional, for quantization
-# sentence-transformers
-# pypdf
-# python-docx
-# chromadb
-# tqdm # For progress bars during indexing
-
-# ----------------------------------------
-# main.py
-# ----------------------------------------
 import logging
 import config
 from file_indexer import build_index

@@ -1,0 +1,14 @@
+torch
+torchvision
+torchaudio
+transformers
+accelerate
+bitsandbytes
+sentence-transformers
+chromadb
+pypdf
+python-docx
+tqdm
+
+# Note: You might need to adjust the torch line based on your specific CUDA/CPU setup by getting the correct command 
+#       from the PyTorch website (https://pytorch.org/get-started/locally/).
