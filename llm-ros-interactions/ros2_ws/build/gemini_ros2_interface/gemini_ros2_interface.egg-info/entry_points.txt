@@ -1,0 +1,4 @@
+[console_scripts]
+command_input_node = gemini_ros2_interface.command_input_node:main
+gemini_processor_node = gemini_ros2_interface.gemini_processor_node:main
+

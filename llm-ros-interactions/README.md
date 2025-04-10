@@ -1,21 +1,26 @@
 # LLM & Robotic Interaction Project
+	- Have python and the python google lib installed on your machine/construct
 
 ## Using "The Construct" Free-tier Workspace (Recommended)
 	- Copy ros2_ws folder into your IDE
 	- cd into the folder
 	- Run:
-		- colcon build
+		cd src
+		ros2 pkg create --build-type ament_python gemini_ros2_interface --dependencies rclpy std_msgs
+		cd ..
+		colcon build --packages-select gemini_ros2_interface
+		source install/setup.bash
 	- open up two different terminals
 	- In Terminal 1:
 		- source ~/ros2_ws/install/setup.bash
-		- ros2 run basic_comm talker
+		- ros2 run gemini_ros2_interface command_input_node
 	- In Terminal 2:
 		- source ~/ros2_ws/install/setup.bash
-		- ros2 run basic_comm listener
-	- In Terminal 3 (Sending live updates):
-		- ros2 param set /talker_node message "your command here" 
+		- ros2 run gemini_ros2_interface gemini_processor_node
 
-## Local System Setup:
+
+
+## Local System Setup (Not Recommended):
 	- I'm working on an AWS EC2 using Ubuntu 22.04
 	- Have cmake installed (sudo apt install cmake)
 

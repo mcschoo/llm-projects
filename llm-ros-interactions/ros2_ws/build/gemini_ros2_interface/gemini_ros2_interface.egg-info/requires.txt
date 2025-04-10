@@ -1,0 +1,4 @@
+google-generativeai
+rclpy
+setuptools
+std_msgs
