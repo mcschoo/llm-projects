@@ -5,39 +5,43 @@ from std_msgs.msg import String
 import threading
 import sys
 
-# All this does is capture a command sent by the user through the cli, and then publishes it to any of it's subscribers
+# NEW Topic for raw user input
+PUB_TOPIC = "/raw_user_command"
+
 class CommandInputNode(Node):
+    """
+    Node to capture user input from the command line and publish it RAW.
+    """
     def __init__(self):
         super().__init__('command_input_node')
-        self.publisher_ = self.create_publisher(String, '/user_command_text', 10)
-        self.get_logger().info('Command Input Node started. Ready for input.')
+        # Publish to the new raw command topic
+        self.publisher_ = self.create_publisher(String, PUB_TOPIC, 10)
+        self.get_logger().info(f'Command Input Node started. Publishing raw commands to {PUB_TOPIC}.')
 
     def publish_command(self, command_text):
+        """Publishes the user's raw command."""
         msg = String()
         msg.data = command_text
         self.publisher_.publish(msg)
-        self.get_logger().info(f'Publishing command: "{command_text}"')
+        self.get_logger().info(f'Publishing raw command: "{command_text}"')
 
 def main(args=None):
     rclpy.init(args=args)
     command_input_node = CommandInputNode()
 
-    # Spin the node in a separate thread to avoid blocking the input loop
     spin_thread = threading.Thread(target=rclpy.spin, args=(command_input_node,), daemon=True)
     spin_thread.start()
 
     try:
         while rclpy.ok():
             try:
-                # Get input from the user in the main thread
                 user_input = input("Enter command for robot (or 'exit' to quit): ")
                 if user_input.lower() == 'exit':
                     break
                 if not user_input:
                     continue
-                # Publish the command using the node's method
                 command_input_node.publish_command(user_input)
-            except EOFError: # Handle Ctrl+D
+            except EOFError:
                 break
             except Exception as e:
                  command_input_node.get_logger().error(f"Error in input loop: {e}")
@@ -47,7 +51,7 @@ def main(args=None):
     finally:
         command_input_node.get_logger().info('Shutting down Command Input Node.')
         rclpy.shutdown()
-        spin_thread.join() # Wait for spin thread to finish cleanly
+        spin_thread.join()
 
 if __name__ == '__main__':
     main()

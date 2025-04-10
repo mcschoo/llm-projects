@@ -1,20 +1,30 @@
 # LLM & Robotic Interaction Project
-	- Have python and the python google-generativeai lib installed on your machine/construct
+	- Have python, the python google-generativeai lib, pytorch, and python transformers lib installed on your machine/construct 
+	- pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+	- pip install transformers
 
 ## Using "The Construct" Free-tier Workspace (Recommended)
-	- Copy ros2_ws folder into your IDE
-	- cd into the folder
-	- Run:
-		cd src
-		ros2 pkg create --build-type ament_python gemini_ros2_interface --dependencies rclpy std_msgs
-		cd ..
-		colcon build --packages-select gemini_ros2_interface
-		source install/setup.bash
-	- open up two different terminals
-	- In Terminal 1:
+	- ***Note: If you are on the free version of construct, this project will be to large for you to save without deleting some files, and rebuilding each time to run the instance
+	- Setup with ROS2 (Humble) and a custom sim
+
+## Running the Nodes in your Instance
+	- ***Either tarball the "gemini_ros2_interface" or take the already existing "python_files.tar", and un-tar the files into your src directory in Construct
+	- cd ~/ros2_ws/src
+	- ros2 pkg create --build-type ament_python gemini_ros2_interface --dependencies rclpy std_msgs
+	- ***Replace the created "package.xml" & "setup.py" files with those here
+	- cd ..
+	- colcon build --packages-select gemini_ros2_interface
+	- ***Open 3 terminals
+
+	In Terminal 1:
 		- source ~/ros2_ws/install/setup.bash
 		- ros2 run gemini_ros2_interface command_input_node
-	- In Terminal 2:
+
+	In Terminal 2:
+		- source ~/ros2_ws/install/setup.bash
+		- ros2 run gemini_ros2_interface summarizer_processor_node
+
+	In Terminal 3:
 		- source ~/ros2_ws/install/setup.bash
 		- ros2 run gemini_ros2_interface gemini_processor_node
 
