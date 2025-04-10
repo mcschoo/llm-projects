@@ -1,5 +1,5 @@
 # LLM & Robotic Interaction Project
-	- Have python and the python google lib installed on your machine/construct
+	- Have python and the python google-generativeai lib installed on your machine/construct
 
 ## Using "The Construct" Free-tier Workspace (Recommended)
 	- Copy ros2_ws folder into your IDE
