@@ -97,3 +97,9 @@
 	echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.bashrc
 	source ~/.bashrc
 
+### ROS hates it's packages. I don't have it working currently, but here's what I've installed so far that's gotten me further each time:
+	sudo apt install --reinstall ros-humble-rosidl-adapter
+	sudo apt install -y python3-empy python3-colcon-common-extensions
+
+	***Make sure to run "rm -rf build/ install/ log/" whenever you go through trying to fix stuff atp of the process, as the bugs might live there and continue to yell at you
+
